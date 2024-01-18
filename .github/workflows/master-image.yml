@@ -31,6 +31,7 @@ jobs:
         echo "checking bin"
         ls /usr/local/bin
         ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
+        ln -s /usr/local/bin/glibtool /usr/local/bin/libtool
         echo "checking lib"
         ls /usr/local/lib
         echo "checking include"
@@ -43,6 +44,7 @@ jobs:
 
     - name: Deploy to S3
       run: |
+        export PATH=$PATH:/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share
         sh ./setup.sh --local
         sh ./build.sh --system --parallel
 
@@ -72,6 +74,7 @@ jobs:
         echo "checking bin"
         ls /usr/local/bin
         ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
+        ln -s /usr/local/bin/glibtool /usr/local/bin/libtool
         echo "checking lib"
         ls /usr/local/lib
         echo "checking include"
@@ -80,6 +83,7 @@ jobs:
         ls /usr/local/share
         echo "checking opt"
         ls /usr/local/opt
+        export PATH=$PATH:/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share
 
 
     - name: Deploy to S3
