@@ -30,7 +30,7 @@ jobs:
         echo $PATH
         echo "github path"
         echo $GITHUB_PATH
-        echo "{:/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share}" >> $GITHUB_PATH
+        echo "/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share" >> $GITHUB_PATH
         echo $PATH
         echo "github path"
         echo $GITHUB_PATH
