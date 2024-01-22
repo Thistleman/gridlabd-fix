@@ -53,6 +53,9 @@ jobs:
         echo $PATH
         echo "github path"
         echo $GITHUB_PATH
+        sh echo $PATH
+        sh echo "github path"
+        sh echo $GITHUB_PATH
         sh ./setup.sh --local
         sh ./build.sh --system --parallel
 
