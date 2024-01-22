@@ -42,8 +42,12 @@ jobs:
         ls /usr/local/opt
 
     - name: Add library to PATH
-      run: echo "$(brew --prefix zstd)/bin" >> $GITHUB_PATH
+      run: |
+        echo "$(brew --prefix zstd)/lib" >> $GITHUB_ENV
 
+    - name: Add library to PATH
+      run: |
+        echo "$(brew --prefix zstd)/bin" >> $GITHUB_PATH
 
     - name: Deploy to S3
       run: |
