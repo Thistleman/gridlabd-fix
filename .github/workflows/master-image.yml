@@ -25,29 +25,14 @@ jobs:
 #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #        aws-region: ${{ s
 
-    - name: Conduct checks
+    - name: Symlink for libtool
       run: |
-        echo "/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share" >> $GITHUB_PATH
-        echo "checking bin"
-        ls /usr/local/bin
         ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
         ln -s /usr/local/bin/glibtool /usr/local/bin/libtool
-        echo "checking lib"
-        ls /usr/local/lib
-        echo "checking include"
-        ls /usr/local/include
-        echo "checking share"
-        ls /usr/local/share
-        echo "checking opt"
-        ls /usr/local/opt
 
-    - name: Add library to PATH
+    - name: Add libraries to PATH
       run: |
         echo "LIBRARY_PATH=$(brew --prefix)/lib:$(brew --prefix)/opt:$(brew --prefix)/include" >> $GITHUB_ENV
-
-    - name: Add library to PATH
-      run: |
-        echo "$(brew --prefix zstd)/bin" >> $GITHUB_PATH
 
     - name: Deploy to S3
       run: |
@@ -77,22 +62,14 @@ jobs:
 #        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #        aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Conduct checks
+    - name: Symlink for libtool
       run: |
-        echo $PATH
-        echo "checking bin"
-        ls /usr/local/bin
         ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
         ln -s /usr/local/bin/glibtool /usr/local/bin/libtool
-        echo "checking lib"
-        ls /usr/local/lib
-        echo "checking include"
-        ls /usr/local/include
-        echo "checking share"
-        ls /usr/local/share
-        echo "checking opt"
-        ls /usr/local/opt
-        export PATH=$PATH:/usr/local/opt:/usr/local/lib:/usr/local/include:/usr/local/share
+
+    - name: Add libraries to PATH
+      run: |
+        echo "LIBRARY_PATH=$(brew --prefix)/lib:$(brew --prefix)/opt:$(brew --prefix)/include" >> $GITHUB_ENV
 
 
     - name: Deploy to S3
