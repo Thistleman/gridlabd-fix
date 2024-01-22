@@ -43,8 +43,7 @@ jobs:
 
     - name: Add library to PATH
       run: |
-        brew install zstd
-        echo "LIBRARY_PATH=$(brew --prefix zstd)/lib" >> $GITHUB_ENV
+        echo "LIBRARY_PATH=$(brew --prefix)/lib:$(brew --prefix)/opt:$(brew --prefix)/include" >> $GITHUB_ENV
 
     - name: Add library to PATH
       run: |
