@@ -42,7 +42,19 @@ jobs:
     - name: Deploy to S3
       run: |
         sh ./setup.sh --local
-        sh ./build.sh --system --parallel --validate --upload --release
+        sh ./build.sh --system --parallel --release
+        
+    - name: Validate system
+      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
+        
+    - name: Upload artifacts on failure
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: validate-result-13
+        path: |
+          validate.txt
+          validate.tar.gz
 
   buildMacos14FastS3:
 
@@ -79,7 +91,19 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel --validate --upload --release
+        sh ./build.sh --system --parallel --release
+        
+    - name: Validate system
+      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
+        
+    - name: Upload artifacts on failure
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: validate-result-14
+        path: |
+          validate.txt
+          validate.tar.gz
 
   buildMacos15FastS3:
 
@@ -116,7 +140,19 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel --validate --upload --release
+        sh ./build.sh --system --parallel --release
+        
+    - name: Validate system
+      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
+        
+    - name: Upload artifacts on failure
+      uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: validate-result-15
+        path: |
+          validate.txt
+          validate.tar.gz
 
   buildUbuntu22FastS3:
 
@@ -126,6 +162,16 @@ jobs:
       image: ubuntu:jammy
 
     steps:
+    # Clean out runner mysql to resolve install issues for ubuntu 22
+    - name: Set ownership and prep container
+      run: |
+        sudo systemctl stop mysql
+        sudo apt purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+        sudo rm -rf /etc/mysql /var/lib/mysql /var/log/mysql
+        sudo apt autoremove
+        sudo apt autoclean
+        
+      
       # this is to fix GIT not liking owner of the checkout dir
     - name: Set ownership and prep container
       run: |
@@ -152,7 +198,7 @@ jobs:
         sh ./setup.sh --local
         sh ./build.sh --system --parallel
         gridlabd python -m pip install awscli
-        sh ./build.sh --validate --upload --release
+        sh ./build.sh --system --validate --upload --release
 
   buildUbuntu24FastS3:
 
@@ -189,7 +235,7 @@ jobs:
         sh ./build.sh --system --parallel
         ln -sf /usr/bin/python3.10 /usr/local/opt/gridlabd/current/bin/python3.10
         gridlabd python -m pip install awscli
-        sh ./build.sh --validate --upload --release
+        sh ./build.sh --system --validate --upload --release
 
   buildUbuntuDockerhub:
 
