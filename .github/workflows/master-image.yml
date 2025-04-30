@@ -42,7 +42,7 @@ jobs:
     - name: Deploy to S3
       run: |
         sh ./setup.sh --local
-        sh ./build.sh --system --parallel --release
+        sh ./build.sh --system --parallel
         
     - name: Validate system
       run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
@@ -91,7 +91,7 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel --release
+        sh ./build.sh --system --parallel
         
     - name: Validate system
       run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
@@ -140,7 +140,7 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel --release
+        sh ./build.sh --system --parallel
         
     - name: Validate system
       run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
@@ -165,11 +165,11 @@ jobs:
     # Clean out runner mysql to resolve install issues for ubuntu 22
     - name: Set ownership and prep container
       run: |
-        sudo systemctl stop mysql
-        sudo apt purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
-        sudo rm -rf /etc/mysql /var/lib/mysql /var/log/mysql
-        sudo apt autoremove
-        sudo apt autoclean
+        systemctl stop mysql
+        apt-get purge mysql-server mysql-client mysql-common mysql-server-core-* mysql-client-core-*
+        rm -rf /etc/mysql /var/lib/mysql /var/log/mysql
+        apt-get autoremove
+        apt-get autoclean
         
       
       # this is to fix GIT not liking owner of the checkout dir
