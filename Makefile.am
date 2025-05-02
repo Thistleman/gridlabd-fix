@@ -33,18 +33,18 @@ ACLOCAL_AMFLAGS = -I m4
 CC = $(PTHREAD_CC)
 CXX = $(PTHREAD_CXX)
 
-AM_CPPFLAGS = -Wall -fPIC -ffp-contract=off -fno-fast-math
+AM_CPPFLAGS = -Wall -fPIC
 AM_CPPFLAGS += -I$(top_srcdir)/source #-I$(top_srcdir)/build-dir/source
 AM_CPPFLAGS += $(GLD_CPPFLAGS)
 AM_CPPFLAGS += $(PYCFLAGS)
 
-AM_CFLAGS = -Wall -ffp-contract=off -fno-fast-math
+AM_CFLAGS = -Wall
 AM_CFLAGS +=  -I$(top_srcdir)/source #-I$(top_srcdir)/build-dir/source
 AM_CFLAGS += $(PTHREAD_CFLAGS)
 AM_CFLAGS += $(GLD_CFLAGS)  #-I$(top_srcdir)/build-dir/source
 AM_CFLAGS += $(PYCFLAGS)
 
-AM_CXXFLAGS = -Wall -fPIC -ffp-contract=off -fno-fast-math
+AM_CXXFLAGS = -Wall -fPIC
 AM_CXXFLAGS += $(PTHREAD_CFLAGS)
 AM_CXXFLAGS += $(GLD_CXXFLAGS) #-I$(top_srcdir)/build-dir/source
 AM_CXXFLAGS += $(PYCFLAGS)
