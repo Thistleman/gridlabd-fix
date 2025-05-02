@@ -42,20 +42,8 @@ jobs:
     - name: Deploy to S3
       run: |
         sh ./setup.sh --local
-        sh ./build.sh --system --parallel
+        sh ./build.sh --system --parallel --validateghactions
         
-    - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
-        
-    - name: Upload artifacts on failure
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: validate-result-13
-        path: |
-          validate.txt
-          validate.tar.gz
-
   buildMacos14FastS3:
 
     runs-on: macos-14
@@ -91,19 +79,7 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel
-        
-    - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
-        
-    - name: Upload artifacts on failure
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: validate-result-14
-        path: |
-          validate.txt
-          validate.tar.gz
+        sh ./build.sh --system --parallel --validateghactions
 
   buildMacos15FastS3:
 
@@ -140,19 +116,7 @@ jobs:
         sudo chmod 2777 /usr/local/opt/gridlabd
         sh ./setup.sh --local
         brew install gdal
-        sh ./build.sh --system --parallel
-        
-    - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
-        
-    - name: Upload artifacts on failure
-      uses: actions/upload-artifact@v4
-      if: failure()
-      with:
-        name: validate-result-15
-        path: |
-          validate.txt
-          validate.tar.gz
+        sh ./build.sh --system --parallel --validateghactions
 
   buildUbuntu22FastS3:
 
@@ -196,7 +160,6 @@ jobs:
         sh ./setup.sh --local
         sh ./build.sh --system --parallel --validateghactions
         gridlabd python -m pip install awscli
-        sh ./build.sh  --upload --release
 
   buildUbuntu24FastS3:
 
@@ -225,7 +188,6 @@ jobs:
 #        role-session-name: developImagesUbuntu24Update
 #        aws-region: ${{ secrets.AWS_REGION }}
 
-# test remove         ln -sf /usr/bin/python3.10 /usr/local/opt/gridlabd/current/bin/python3.10
     - name: Deploy to S3
       run: |
         export GIT_DISCOVERY_ACROSS_FILESYSTEM=1
@@ -233,7 +195,6 @@ jobs:
         sh ./setup.sh --local
         sh ./build.sh --system --parallel --validateghactions
         gridlabd python -m pip install awscli
-        sh ./build.sh --upload --release
 
   buildUbuntuDockerhub:
 
