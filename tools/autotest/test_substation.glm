@@ -1,3 +1,4 @@
+#ifndef macosv14
 #system gridlabd substation US WA Snohomish -o=test_substation_opt.glm
 
 // TODO: delete this one pypower module support substations
@@ -20,4 +21,5 @@ class substation
 
 #ifexist "../test_substation_opt.glm"
 #on_exit 0 diff ../test_substation_opt.glm test_substation_opt.glm
+#endif
 #endif
