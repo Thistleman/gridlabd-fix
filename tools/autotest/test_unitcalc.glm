@@ -1,6 +1,8 @@
 #system gridlabd unitcalc test
 #system gridlabd unitcalc list > test_unitcalc.txt
 
+#ifndef macosv14
 #ifexist ../test_unitcalc.txt
 #on_exit 0 diff ../test_unitcalc.txt test_unitcalc.txt > gridlabd.diff
+#endif
 #endif

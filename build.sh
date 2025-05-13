@@ -96,6 +96,12 @@ while [ $# -gt 0 ]; do
 			fi
 			VERIFY="-T 0 --validate -D github_actions=yes"
 			;;
+		--validatem14 )
+			if [ -z "$VERIFY" ]; then
+				error "cannot validate unless you install"
+			fi
+			VERIFY="-T 0 --validate -D macosv14=yes"
+			;;
 		--ignore )
 			export MAKEFLAGS="$MAKEFLAGS -i"
 			;;
