@@ -598,7 +598,7 @@ DOCDIR=$DSTDIR/share/doc/gridlabd
 # Python virtual environment check
 #
 
-PYTHON_REQ=3.10
+PYTHON_REQ=3.11
 
 if test "x$VIRTUAL_ENV" = "x"; then
   if test -f $HOME/.gridlabd/bin/activate; then
