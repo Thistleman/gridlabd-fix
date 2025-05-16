@@ -56,6 +56,10 @@ jobs:
       run: |
         chown -R $(id -u):$(id -g) $PWD
 
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
     - name: Symlink for libtool
       run: |
         ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
@@ -65,7 +69,7 @@ jobs:
       run: |
         echo "LIBRARY_PATH=$(brew --prefix)/lib:$(brew --prefix)/opt:$(brew --prefix)/include" >> $GITHUB_ENV
 
-    - name: Deploy to S3
+    - name: Build Gridlabd
       run: |
         sudo mkdir -p /usr/local/opt/gridlabd
         sudo chmod 2777 /usr/local/opt/gridlabd
@@ -74,7 +78,7 @@ jobs:
         sh ./build.sh --system --parallel
         
     - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 1 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
+      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes || ( sudo utilities/save_validation_errors ; false )
         
     - name: Upload artifacts on failure
       uses: actions/upload-artifact@v4
