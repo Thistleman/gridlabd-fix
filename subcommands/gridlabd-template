@@ -10,9 +10,9 @@ fi
 
 # x values are a nice, meaningless placeholder value!
 GLD_GIT_HEADER="X-foo: bar"
-# check for github api token
+# check for github api token and set header if defined
 if [ -z $GH_TOKEN]; then
-    GLD_GIT_HEADER="authorization: Bearer $GH_TOKEN"
+    GLD_GIT_HEADER="Authorization: Bearer $GH_TOKEN"
 fi
 
 # configurable parameters
