@@ -77,7 +77,7 @@ jobs:
         sh ./build.sh --system --parallel
         
     - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
+      run: sudo gridlabd -D keep_progress=TRUE --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
         
     - name: Upload artifacts on failure
       uses: actions/upload-artifact@v4
@@ -121,7 +121,7 @@ jobs:
         sh ./build.sh --system --parallel
         
     - name: Validate system
-      run: sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
+      run: sudo gridlabd -D keep_progress=TRUE --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
         
     - name: Upload artifacts on failure
       uses: actions/upload-artifact@v4
@@ -169,7 +169,7 @@ jobs:
         if [ -z $GH_TOKEN]; then
           echo "GH Token: $GH_TOKEN"
         fi
-        sudo gridlabd -D keep_progress=TRUE -T 0 --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
+        sudo gridlabd -D keep_progress=TRUE --validate -D github_actions=yes -D GH_TOKEN=$GH_TOKEN || ( sudo utilities/save_validation_errors ; false )
         
     - name: Upload artifacts on failure
       uses: actions/upload-artifact@v4

@@ -2,7 +2,7 @@ set -x
 alias INSTALL=''
 
 INSTALL error () { echo "ERROR [darwin_20-x86_64.sh]: $*" > /dev/stderr ; exit 1 ; }
-INSTALL PYTHON_VERSION=3.11
+INSTALL PYTHON_VERSION=3.10
 INSTALL PYTHON_VENV=${HOME:-/tmp}/.gridlabd
 INSTALL PYTHON_EXEC=$PYTHON_VENV/bin/python$PYTHON_VERSION
 INSTALL PYTHON_CONFIG=$PYTHON_VENV/bin/python${PYTHON_VERSION}-config
