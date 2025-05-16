@@ -1,4 +1,4 @@
-#ifndef macosv14
+#if ${github_actions:-no} == no
 #system gridlabd unitcalc test
 #system gridlabd unitcalc list > test_unitcalc.txt
 

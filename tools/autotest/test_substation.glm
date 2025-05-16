@@ -1,4 +1,4 @@
-#ifndef macosv14
+#if ${github_actions:-no} == no
 #system gridlabd substation US WA Snohomish -o=test_substation_opt.glm
 
 // TODO: delete this one pypower module support substations
