@@ -37,6 +37,8 @@ AC_DEFUN([GCC_CT_FEATURES],[
 	#warning ARCH = ppc64
 #elif defined(__ppc__)
 	#warning ARCH = ppc
+#elif defined(__aarch64__)
+	#warning ARCH = aarch64
 #endif
 							 ],
 							[GCC_PARSE_CT_OUTPUT()],
