@@ -9,7 +9,7 @@ if [ ${GLD_ETC:-none} == none ]; then
 fi
 
 # check for github api token and set header if defined
-if [ -z $GH_TOKEN]; then
+if [ -z "$GH_TOKEN"]; then
     echo "inside! token defined! $GH_TOKEN"
     GLD_GIT_HEADER='--header "Authorization: Bearer '$GH_TOKEN'"'
 fi
