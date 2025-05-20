@@ -122,6 +122,7 @@ jobs:
 
     - name: Build Gridlabd
       run: |
+        sudo gridlabd -D GITHUB_TOKEN=$GITHUB_TOKEN
         sudo gridlabd template get ica_analysis
         
     - name: Validate system
@@ -170,9 +171,6 @@ jobs:
         
     - name: Validate system
       run: | 
-        if [ -z $GITHUB_TOKEN]; then
-          echo "GH Token: $GITHUB_TOKEN"
-        fi
         sudo gridlabd -D keep_progress=TRUE -D maximum_runtime=1800 -T 1 --validate -D github_actions=yes -D GITHUB_TOKEN=$GITHUB_TOKEN || ( sudo utilities/save_validation_errors ; false )
         
     - name: Upload artifacts on failure
